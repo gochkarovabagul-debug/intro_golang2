@@ -42,9 +42,11 @@ package main
 
 import "fmt"
 
-type Animalfarm struct {
+type Animalfam struct {
 	animal []animal
 }
+
+// test git
 
 type animal struct {
 	name     string
