@@ -88,22 +88,31 @@ func main() {
 		{name: "camel", weight: 40, consumes: 3, produces: 4},
 		{name: "cow", weight: 30, consumes: 2, produces: 5},
 		{name: "dog", weight: 20, consumes: 1, produces: 6},
+		{name: "ship", weight: 30, consumes: 4, produces: 4},
 	}
 	fmt.Println("total comsumes: ", totalconsumes(sliceofanimal))
 	fmt.Println("total producees: ", totalproduces(sliceofanimal))
 	fmt.Println("total profit: ", totalprofit(sliceofanimal))
 	fmt.Println("total weight: ", totalweight(sliceofanimal))
 
-	sameweightanimals := []string{}
+	sameweightanimals := map[int][]string{}
+
 	for _, a := range sliceofanimal {
-		if a.weight == 40 {
-			sameweightanimals = append(sameweightanimals, a.name)
-		}
+		sameweightanimals[a.weight] = append(sameweightanimals[a.weight], a.name)
 	}
 	fmt.Println("same weight animals:", sameweightanimals)
+
+	mostprofitnanimal := sliceofanimal[0]
+	bestprofit := mostprofitnanimal.produces - mostprofitnanimal.consumes
+	for _, a := range sliceofanimal {
+		profit := a.produces - a.consumes
+		if bestprofit < profit {
+			mostprofitnanimal = a
+			bestprofit = profit
+		}
+	}
+	fmt.Println("best profit animal:", mostprofitnanimal.name, ",", "profit: ", bestprofit)
+
 }
 
-// func totalprofit(sliceofanimal []animal) int{
-//  profit:= func (totalproduces(sliceofanimal []animal))-func (totalconsumes(sliceofanimal []animal))
-//  return profit
-// }
+
